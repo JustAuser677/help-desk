@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/style.css}">.
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">О нас</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 th:text="${pageTitle}">О нас</h1>
+    <hr>
+    <p>Мы — команда профессионалов, готовых помочь вам в решении любых технических проблем. Наш портал Help Desk создан для быстрой и эффективной обработки ваших обращений.</p>
+    <a href="/" class="btn btn-secondary">Вернуться на главную</a>
+</div>
+</body>
+</html>
