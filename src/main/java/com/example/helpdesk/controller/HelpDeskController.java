@@ -1,5 +1,5 @@
 package com.example.helpdesk.controller;
-
+import java.util.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +23,29 @@ public class HelpDeskController {
 
     @GetMapping("/contacts")
     public String contacts(Model model){
+
+        List<String> contacts = List.of(
+                "support@mail.ru",
+                "+7 (926) 349-67-55",
+                "Telegram: @support",
+                "ВК: @support"
+        );
+
         model.addAttribute("pageTitle", "Контакты поддержки");
-        model.addAttribute("supportEmail", "support@mail.ru");
-        model.addAttribute("workTime","Пн-Пт, 9:00-18:00");
-        model.addAttribute("phoneNumber", "+7 (228) 1337-67-55");
+        model.addAttribute("listOfSupport", contacts);
         return "contacts";
+    }
+
+    @GetMapping("/faq")
+    public String faq(Model model){
+        model.addAttribute("pageTitle","ЧАВО");
+
+        return "faq";
+    }
+
+    @GetMapping("/etc")
+    public String etc(Model model){
+        model.addAttribute("pageTitle", "Дополнительно");
+        return "etc";
     }
 }
