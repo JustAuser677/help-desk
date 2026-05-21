@@ -51,6 +51,18 @@
             <artifactId>helpDesk</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-h2console</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
