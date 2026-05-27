@@ -33,7 +33,78 @@
     <img th:src="@{/images/picture.png}" alt="Logo" style="width: 90px; height: 90px">
     <h1 class="display-4" th:text="${welcome}">Добро пожаловать!</h1>
     <p class="lead">Создайте заявку, и наши специалисты помогут вам в кратчайшие сроки</p>
-    <a href="#" class="btn btn-primary btn-lg mt-3">Создать заявку</a>
+    <a class="btn btn-primary btn-lg mt-3" onclick="showForm()">Создать заявку</a>
 </div>
+
+<main class="container py-5">
+    <div id="form" class="card shadow-sm" style="display: none">
+        <div class="container mt-4">
+            <label>Заявитель</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Ваше имя">
+            <small id="nameError" class="form-text text-muted" style="color: darkred; display: none"></small>
+        </div>
+        <div class="container mt-4">
+            <label>Заголовок заявки</label>
+            <input type="text" class="form-control" id="inputHeader" placeholder="Заголовок">
+            <small id="headerError" class="form-text text-muted" style="color: darkred; display: none"></small>
+        </div>
+        <div class="container mt-4">
+            <label>Описание</label>
+            <input type="text" class="form-control" id="inputDesc" placeholder="Описание">
+            <small id="descError" class="form-text text-muted" style="color: darkred; display: none"></small>
+        </div>
+        <div class="container mt-4">
+            <button type="button" class="btn btn-primary btn-lg mt-3 mb-3" onclick="sendRequest()">Отправить</button>
+            <small id="sendStatus" class="form-text" style="display: none"></small>
+        </div>
+    </div>
+</main>
+<script>
+    function showForm(){
+        const form = document.getElementById('form');
+        if(form){
+            form.style.display='block';
+        }
+    }
+
+    async function sendRequest(){
+        const nameInput=document.getElementById('inputName');
+        const headerInput = document.getElementById('inputHeader');
+        const descInput = document.getElementById('inputDesc');
+
+        const nameError = document.getElementById('nameError');
+        const headerError = document.getElementById('headerError');
+        const descError = document.getElementById('descError');
+
+        const statusText = document.getElementById('sendStatus');
+        try{
+            await fetch(
+                'http://localhost:8000/api/tickets',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        title:headerInput.value,
+                        description:descInput.value,
+                        status:'IN_PROGRESS',
+                        customerName: nameInput.value
+                    })
+                }
+            ).then(response=>response.json());
+            statusText.style.display='block';
+            statusText.style.color='green';
+            statusText.textContent='Заявка отправлена на рассмотрение!';
+
+        }
+        catch (error){
+            statusText.style.display='block';
+            statusText.style.color='red';
+            statusText.textContent='Возникла непредвиденная ошибка!';
+            console.log(`Ошибка: ${error}`);
+        }
+
+    }
+</script>
 </body>
 </html>

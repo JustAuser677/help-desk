@@ -11,4 +11,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAllByOrderByCreatedAtDesc();
     List<Ticket> findByStatus(TicketStatus status);
     List<Ticket> findByCustomerNameContainingIgnoreCase(String customerName);
+
+
 }
