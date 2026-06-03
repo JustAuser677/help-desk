@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/tickets")
+//@RequestMapping("/api/tickets")
 public class TicketRestController {
-    @Autowired
-    private TicketService ticketService;
-    @PostMapping
-    public Ticket createTicket(@RequestBody Ticket ticket){
-        return ticketService.saveTicket(ticket);
-    }
+//    @Autowired
+//    private TicketService ticketService;
+//    @PostMapping
+//    public Ticket createTicket(@RequestBody Ticket ticket){
+//        return ticketService.saveTicket(ticket);
+//    }
 }
