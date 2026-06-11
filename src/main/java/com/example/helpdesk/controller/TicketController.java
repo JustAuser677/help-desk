@@ -27,20 +27,20 @@ public class TicketController {
     @GetMapping()
     public String tickets(Model model){
         model.addAttribute("tickets", ticketRepository.findAllByOrderByCreatedAtDesc());
-        return "tickets";
+        return "redirect:/admin/tickets";
     }
 
     //Улучшил систему фильтрации: теперь можно фильтровать не только по NEW, но и по остальным статусам
     @GetMapping("/status/{status}")
     public String ticketsNew(Model model, @PathVariable String status){
         model.addAttribute("tickets", ticketRepository.findByStatus(TicketStatus.valueOf(status.toUpperCase())));
-        return "tickets";
+        return "redirect:/admin/tickets/status/"+status.toUpperCase();
     }
 
     @GetMapping("/name/{name}")
     public String ticketsByName(Model model, @PathVariable String name){
         model.addAttribute("tickets", ticketRepository.findByCustomerNameContainingIgnoreCase(name));
-        return "tickets";
+        return "redirect:/admin/tickets/name/"+name;
     }
 
     @GetMapping("/new")
@@ -68,6 +68,4 @@ public class TicketController {
         model.addAttribute("ticket", ticket);
         return "ticket-success";
     }
-
-
 }
